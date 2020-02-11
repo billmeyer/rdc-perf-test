@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Sauce Demo Test Suite" verbose="1" parallel="tests" thread-count="1" configfailurepolicy="continue">
+
+    <!--    <test name="Parallel tests" parallel="methods" thread-count="1">-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <exclude name="sequential-test"></exclude>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--&lt;!&ndash;        <packages>&ndash;&gt;-->
+    <!--&lt;!&ndash;            <package name="io.billmeyer.saucelabs.parallel"></package>&ndash;&gt;-->
+    <!--&lt;!&ndash;        </packages>&ndash;&gt;-->
+    <!--        <classes>-->
+    <!--            <class name="io.billmeyer.saucelabs.parallel.AndroidEmuTest"/>-->
+    <!--            <class name="io.billmeyer.saucelabs.parallel.IOSSimTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+
+<!--    <test name="TestObject tests" parallel="false">-->
+<!--        <classes>-->
+<!--            <class name="io.billmeyer.saucelabs.parallel.AndroidTOTest"/>-->
+<!--            <class name="io.billmeyer.saucelabs.parallel.IOSTOTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="Sauce RDC tests" parallel="false">-->
+<!--        <classes>-->
+<!--            <class name="io.billmeyer.saucelabs.parallel.AndroidUPTest"/>-->
+<!--            <class name="io.billmeyer.saucelabs.parallel.IOSUPTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="Sauce Emu/Sim tests" parallel="false">
+        <classes>
+            <class name="io.billmeyer.saucelabs.parallel.AndroidEmuTest"/>
+            <class name="io.billmeyer.saucelabs.parallel.IOSSimTest"/>
+        </classes>
+    </test>
+
+    <test name="Local Emu/Sim tests" parallel="false">
+        <classes>
+            <class name="io.billmeyer.saucelabs.parallel.AndroidLocalTest"/>
+            <class name="io.billmeyer.saucelabs.parallel.IOSLocalTest"/>
+        </classes>
+    </test>
+
+</suite>
