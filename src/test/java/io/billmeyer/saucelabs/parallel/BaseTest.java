@@ -58,7 +58,7 @@ public class BaseTest
      */
     private ThreadLocal<AppiumDriver> appiumDriverThreadLocal = new ThreadLocal<>();
 
-    protected AppiumDriver createDriver(String platformName, String platformVersion, String deviceName, boolean unifiedPlatformTesting, String methodName)
+    protected Tuple<AppiumDriver, TestResults> createDriver(String platformName, String platformVersion, String deviceName, boolean unifiedPlatformTesting, String methodName)
     throws MalformedURLException
     {
         return createDriver(platformName, platformVersion, deviceName, unifiedPlatformTesting, false, methodName);
@@ -76,8 +76,17 @@ public class BaseTest
      * @return
      * @throws MalformedURLException if an error occurs parsing the url
      */
-    protected AppiumDriver createDriver(String platformName, String platformVersion, String deviceName, boolean unifiedPlatformTesting, boolean runLocal, String methodName)
+    protected Tuple<AppiumDriver, TestResults> createDriver(String platformName, String platformVersion, String deviceName, boolean unifiedPlatformTesting, boolean runLocal, String methodName)
     {
+        final String githubUrl = "https://github.com/billmeyer/rdc-perf-test/raw/master/";
+        final boolean useSauceStorage = true;
+
+        String baseUrl = "sauce-storage:";
+        if (useSauceStorage == false)
+        {
+            baseUrl = githubUrl;
+        }
+
         URL url = null;
         DesiredCapabilities caps = new DesiredCapabilities();
 
@@ -113,11 +122,11 @@ public class BaseTest
             }
             if (platformName.equalsIgnoreCase("android"))
             {
-                caps.setCapability("app", "http://octocore1/app-release.apk");
+                caps.setCapability("app", baseUrl + "/app-release.apk");
             }
             else
             {
-                caps.setCapability("app", "http://octocore1/LoanCalc.sim.app.zip");
+                caps.setCapability("app", baseUrl + "/LoanCalc.sim.app.zip");
             }
         }
         // set desired capabilities to launch appropriate platformName on Sauce
@@ -152,14 +161,6 @@ public class BaseTest
             catch (MalformedURLException e)
             {
                 e.printStackTrace();
-            }
-
-            final String githubUrl = "https://github.com/billmeyer/rdc-perf-test/raw/master/";
-            final boolean useSauceStorage = true;
-            String baseUrl = "sauce-storage:";
-            if (useSauceStorage == false)
-            {
-                baseUrl = githubUrl;
             }
 
             if (realDeviceTesting == true)
@@ -205,9 +206,10 @@ public class BaseTest
 //            addBuildInfo(caps);
 //        }
 
+        System.out.println("DC: " + caps.toString());
+
         // Launch the remote platformName and set it as the current thread
         AppiumDriver driver = null;
-
         while (driver == null)
         {
             try
@@ -229,21 +231,27 @@ public class BaseTest
 
         appiumDriverThreadLocal.set(driver);
 
+        Tuple<AppiumDriver, TestResults> returnData = new Tuple();
+        returnData.setItem1(driver);
+
+        TestResults tr = new TestResults();
+        returnData.setItem2(tr);
+
         if (realDeviceTesting == true)
         {
+            String reportUrl;
+
             if (unifiedPlatformTesting == false)
             {
-                String reportUrl = (String) driver.getCapabilities().getCapability("testobject_test_report_url");
-                System.out.printf("Test Results: %s\n", reportUrl);
+                tr.testResultsURL = (String) driver.getCapabilities().getCapability("testobject_test_report_url");
             }
             else
             {
-                String sessionId = (String) driver.getSessionId().toString();
-                System.out.printf("Test Results: https://app.saucelabs.com/tests/%s\n", sessionId);
+                tr.testResultsURL = "https://app.saucelabs.com/tests/" + driver.getSessionId().toString();
             }
         }
 
-        return appiumDriverThreadLocal.get();
+        return returnData;
     }
 
     @BeforeSuite
@@ -340,7 +348,7 @@ public class BaseTest
      *
      * @param driver The WebDriver instance we'll use to get the session ID we want to set the status for
      * @param status TRUE if the test was successful, FALSE otherwise
-     * @see https://api.testobject.com/#!/Appium_Watcher_API/updateTest
+     * @link https://api.testobject.com/#!/Appium_Watcher_API/updateTest
      */
     public void reportTestObjectResult(RemoteWebDriver driver, boolean status)
     {

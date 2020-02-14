@@ -21,11 +21,23 @@ public class TestResults
     public float driverQuit;
     public float totalTime;
     public boolean testPassed;
+    public String testResultsURL;
 
     @Override
     public String toString()
     {
-        return "TestResults{" + "deviceAllocation=" + deviceAllocation + ", locatingElements=" + locatingElements + ", populatingElements=" + populatingElements + ", assertingElements=" + assertingElements + ", driverQuit=" + driverQuit + ", totalTime=" + totalTime + ", testPassed=" + testPassed + '}';
+        //@formatter:off
+        return "TestResults{"
+                + "deviceAllocation=" + deviceAllocation
+                + ", locatingElements=" + locatingElements
+                + ", populatingElements=" + populatingElements
+                + ", assertingElements=" + assertingElements
+                + ", driverQuit=" + driverQuit
+                + ", totalTime=" + totalTime
+                + ", testPassed=" + testPassed
+                + ", testResultsURL=" + testResultsURL
+                + '}';
+        //@formatter:on
     }
 
     public TestResults()
@@ -42,6 +54,7 @@ public class TestResults
         this.driverQuit = driverQuit;
         this.totalTime = totalTime;
         this.testPassed = testPassed;
+        this.testResultsURL = testResultsURL;
     }
 
     public static void dumpResults()
@@ -61,14 +74,14 @@ public class TestResults
     public static void dump(String title, TestResults[] testResults, PrintStream out)
     {
         out.printf("%s\n", title);
-        out.print("Run #|Device Allocation|Locating Elements|Populating Elements|Asserting Elements|Driver Quit|Total Time|Total Time + Device Allocation\n");
+        out.print("Run #|Device Allocation|Locating Elements|Populating Elements|Asserting Elements|Driver Quit|Total Time|Total Time + Device Allocation|Test Results\n");
         for (int run = 0; run < testResults.length; run++)
         {
             out.printf("Run %d|", run);
 
             if (testResults[run] == null)
             {
-                out.printf("-|-|-|-|-|-|-|\n");
+                out.printf("-|-|-|-|-|-|-|-\n");
             }
             else
             {
@@ -86,7 +99,8 @@ public class TestResults
         out.printf("%.2f|", testResult.assertingElements);
         out.printf("%.2f|", testResult.driverQuit);
         out.printf("%.2f|", testResult.totalTime);
-        out.printf("%.2f", testResult.totalTime + testResult.deviceAllocation);
+        out.printf("%.2f|", testResult.totalTime + testResult.deviceAllocation);
+        out.printf("%s", testResult.testResultsURL);
         out.println();
     }
 }

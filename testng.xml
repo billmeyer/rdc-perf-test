@@ -24,25 +24,25 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-<!--    <test name="Sauce RDC tests" parallel="false">-->
-<!--        <classes>-->
+    <test name="Sauce RDC tests" parallel="false">
+        <classes>
 <!--            <class name="io.billmeyer.saucelabs.parallel.AndroidUPTest"/>-->
-<!--            <class name="io.billmeyer.saucelabs.parallel.IOSUPTest"/>-->
+            <class name="io.billmeyer.saucelabs.parallel.IOSUPTest"/>
+        </classes>
+    </test>
+
+<!--    <test name="Sauce Emu/Sim tests" parallel="false">-->
+<!--        <classes>-->
+<!--            <class name="io.billmeyer.saucelabs.parallel.AndroidEmuTest"/>-->
+<!--            <class name="io.billmeyer.saucelabs.parallel.IOSSimTest"/>-->
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="Sauce Emu/Sim tests" parallel="false">
-        <classes>
-            <class name="io.billmeyer.saucelabs.parallel.AndroidEmuTest"/>
-            <class name="io.billmeyer.saucelabs.parallel.IOSSimTest"/>
-        </classes>
-    </test>
-
-    <test name="Local Emu/Sim tests" parallel="false">
-        <classes>
-            <class name="io.billmeyer.saucelabs.parallel.AndroidLocalTest"/>
-            <class name="io.billmeyer.saucelabs.parallel.IOSLocalTest"/>
-        </classes>
-    </test>
+<!--    <test name="Local Emu/Sim tests" parallel="false">-->
+<!--        <classes>-->
+<!--            <class name="io.billmeyer.saucelabs.parallel.AndroidLocalTest"/>-->
+<!--            <class name="io.billmeyer.saucelabs.parallel.IOSLocalTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>

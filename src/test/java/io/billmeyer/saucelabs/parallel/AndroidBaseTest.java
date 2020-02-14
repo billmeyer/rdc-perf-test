@@ -6,8 +6,6 @@ import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 
-import java.net.MalformedURLException;
-
 public class AndroidBaseTest extends BaseTest
 {
     protected TestResults calculateCarLoan(String platformName, String deviceName, String platformVersion, boolean useUnifiedPlatform, String testName)
@@ -22,13 +20,15 @@ public class AndroidBaseTest extends BaseTest
      */
     protected TestResults calculateCarLoan(String platformName, String deviceName, String platformVersion, boolean useUnifiedPlatform, boolean runLocal, String testName)
     {
-        TestResults tr = new TestResults();
-
         System.out.printf(">>> Starting %s...\n", testName);
 
         long start = System.currentTimeMillis();
-        AppiumDriver driver = createDriver(platformName, platformVersion, deviceName, useUnifiedPlatform, runLocal, testName);
+        Tuple<AppiumDriver, TestResults> data = createDriver(platformName, platformVersion, deviceName, useUnifiedPlatform, runLocal, testName);
         long stop = System.currentTimeMillis();
+
+        AppiumDriver driver = data.getItem1();
+        TestResults tr = data.getItem2();
+
         tr.deviceAllocation = (stop - start) / 1000f;
 
         long time1, time2, time3, time4, time5;
