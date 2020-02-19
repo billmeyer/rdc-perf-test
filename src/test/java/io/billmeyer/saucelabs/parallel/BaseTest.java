@@ -82,7 +82,7 @@ public class BaseTest
         final boolean useSauceStorage = true;
 
         String baseUrl = "sauce-storage:";
-        if (useSauceStorage == false)
+        if (useSauceStorage == false || runLocal == true)
         {
             baseUrl = githubUrl;
         }

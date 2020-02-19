@@ -2,12 +2,10 @@ package io.billmeyer.saucelabs.parallel;
 
 import org.testng.annotations.Test;
 
-import java.net.MalformedURLException;
-
 public class IOSLocalTest extends IOSBaseTest
 {
     private final static String deviceName = "iPhone 11 Pro Max";
-    private static final String platformVersion = "13.1";
+    private static final String platformVersion = "13.3";
 
     @Test
     public void iosLocalTest0()
