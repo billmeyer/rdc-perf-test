@@ -6,10 +6,10 @@ import java.net.MalformedURLException;
 
 public class AndroidUPTest extends AndroidBaseTest
 {
-        private final static String deviceName = "Samsung_Galaxy_S6_POC116";
-    private static final String platformVersion = "7";
-//    private final static String deviceName = "Google_Pixel_3_POC150";
-//    private static final String platformVersion = "9";
+//        private final static String deviceName = "Samsung_Galaxy_S6_POC116";
+//    private static final String platformVersion = "7";
+    private final static String deviceName = "Google_Pixel_3_POC150";
+    private static final String platformVersion = "9";
 
     @Test(groups = {"sequential-test"})
     public void androidUPTest0()
