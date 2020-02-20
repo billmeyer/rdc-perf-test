@@ -239,16 +239,7 @@ public class BaseTest
 
         if (realDeviceTesting == true)
         {
-            String reportUrl;
-
-            if (unifiedPlatformTesting == false)
-            {
-                tr.testResultsURL = (String) driver.getCapabilities().getCapability("testobject_test_report_url");
-            }
-            else
-            {
-                tr.testResultsURL = "https://app.saucelabs.com/tests/" + driver.getSessionId().toString();
-            }
+            tr.testResultsURL = (String) driver.getCapabilities().getCapability("testobject_test_report_url");
         }
 
         return returnData;
