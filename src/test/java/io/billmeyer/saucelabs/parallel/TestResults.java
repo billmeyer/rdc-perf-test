@@ -61,11 +61,11 @@ public class TestResults
     {
         System.out.println("Test Results:");
 
-        TestResults.dump("Android Local Emulator Results", androidLocalTestResults, System.out);
+//        TestResults.dump("Android Local Emulator Results", androidLocalTestResults, System.out);
         TestResults.dump("Android Emulator Results", androidEmuTestResults, System.out);
         TestResults.dump("Android TestObject Results", androidTOTestResults, System.out);
         TestResults.dump("Android Unified Platform Results", androidUPTestResults, System.out);
-        TestResults.dump("iOS Local Simulator Results", iosLocalTestResults, System.out);
+//        TestResults.dump("iOS Local Simulator Results", iosLocalTestResults, System.out);
         TestResults.dump("iOS Simulator Results", iosSimTestResults, System.out);
         TestResults.dump("iOS TestObject Results", iosTOTestResults, System.out);
         TestResults.dump("iOS Unified Platform Results", iosUPTestResults, System.out);
